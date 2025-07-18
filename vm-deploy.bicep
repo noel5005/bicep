@@ -1,8 +1,7 @@
 param vmName string
 param adminUsername string
-param adminPassword string {
-  secure: true
-}
+@secure()
+param adminPassword string
 
 resource virtualNetwork 'Microsoft.Network/virtualNetworks@2020-06-01' = {
   name: '${vmName}Vnet'
