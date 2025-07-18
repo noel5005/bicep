@@ -1,0 +1,34 @@
+name: Deploy VM via Bicep
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  RESOURCE_GROUP: myResourceGroup
+  VM_NAME: myVM
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Bicep Template
+        uses: azure/arm-deploy@v2
+        with:
+          subscriptionId: ${{ fromJson(secrets.AZURE_CREDENTIALS).subscriptionId }}
+          resourceGroupName: ${{ env.RESOURCE_GROUP }}
+          template: ./vm-deploy.bicep
+          parameters: |
+            vmName=${{ env.VM_NAME }}
+            adminUsername=youradmin
+            adminPassword=yourpassword123!
