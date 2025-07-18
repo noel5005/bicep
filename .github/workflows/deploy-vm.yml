@@ -32,7 +32,4 @@ jobs:
           subscriptionId: ${{ fromJson(secrets.AZURE_CREDENTIALS).subscriptionId }}
           resourceGroupName: ${{ env.RESOURCE_GROUP }}
           template: ./vm-deploy.bicep
-          parameters: |
-            vmName=${{ env.VM_NAME }}
-            adminUsername=youradmin
-            adminPassword=MySecurePassword123!
+          parameters: vmName=${{ env.VM_NAME }} adminUsername=youradmin adminPassword=MySecurePassword123!
