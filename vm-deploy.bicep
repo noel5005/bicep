@@ -73,8 +73,8 @@ resource vm 'Microsoft.Compute/virtualMachines@2021-07-01' = {
     hardwareProfile: { vmSize: 'Standard_B1s' }
     osProfile: {
       computerName: vmName
-      adminUsername: "youradmin"
-      adminPassword: "YourSecurePassword123!"
+      adminUsername: adminUsername
+      adminPassword: adminPassword
     }
     storageProfile: {
       imageReference: {

@@ -22,13 +22,17 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Create Resource Group
+        run: |
+          az group create --name ${{ env.RESOURCE_GROUP }} --location eastus
+
       - name: Deploy Bicep Template
         uses: azure/arm-deploy@v2
         with:
           subscriptionId: ${{ fromJson(secrets.AZURE_CREDENTIALS).subscriptionId }}
           resourceGroupName: ${{ env.RESOURCE_GROUP }}
           template: ./vm-deploy.bicep
-          parameters: >
+          parameters: |
             vmName=${{ env.VM_NAME }}
-            adminUsername="youradmin"
-            adminPassword="YourSecurePassword123!"
+            adminUsername=youradmin
+            adminPassword=MySecurePassword123!
