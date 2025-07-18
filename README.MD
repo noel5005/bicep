@@ -21,21 +21,20 @@ Deploy an Azure Virtual Machine (VM) automatically using **Bicep** and **GitHub 
 
 Use the Azure CLI to create a new resource group.
 
-az group create --name myResourceGroup --location eastus
+`az group create --name myResourceGroup --location eastus`
 
-text
+
 
 ## Step 2: Create a Service Principal
 
 Generate credentials so GitHub Actions can authenticate with your Azure account.
 
-az ad sp create-for-rbac
+`az ad sp create-for-rbac
 --name my-github-action-sp
 --role contributor
 --scopes /subscriptions/6eee05e7-464d-452d-b059-ca853975e441
---sdk-auth
+--sdk-auth`
 
-text
 
 > **Note**: This command outputs a JSON object. Copy the entire output—you will use it in the next step.
 
@@ -56,10 +55,10 @@ Ensure these files exist in your repository:
 
 Commit and push these files to your main branch:
 
-git add .
+`git add .
 git commit -m "Add VM deployment pipeline"
 git push origin main
-
+`
 text
 
 > **Result:** GitHub Actions will automatically run the workflow and deploy your VM to Azure.
