@@ -21,12 +21,6 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2020-06-01' = {
   }
 }
 
-resource publicIP 'Microsoft.Network/publicIPAddresses@2020-06-01' = {
-  name: '${vmName}PIP'
-  location: resourceGroup().location
-  properties: { publicIPAllocationMethod: 'Dynamic' }
-}
-
 resource nsg 'Microsoft.Network/networkSecurityGroups@2020-06-01' = {
   name: '${vmName}NSG'
   location: resourceGroup().location
@@ -58,7 +52,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2020-06-01' = {
         name: 'ipconfig1'
         properties: {
           subnet: { id: virtualNetwork.properties.subnets[0].id }
-          publicIPAddress: { id: publicIP.id }
+          privateIPAllocationMethod: 'Dynamic'
         }
       }
     ]
